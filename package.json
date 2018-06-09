@@ -1,0 +1,20 @@
+{
+  "name": "aula-node-js",
+  "version": "1.0.0",
+  "description": "Aula treinaweb sobre nodejs",
+  "main": "index.js",
+  "dependencies": {
+    "promise": "^8.0.1",
+    "socket.io": "^2.1.1"
+  },
+  "devDependencies": {
+    "jasmine": "^3.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "create_file": "touch log.txt",
+    "ping_log": "ping www.google.com > log.txt"
+  },
+  "author": "Ataides Rodrigues",
+  "license": "MIT"
+}

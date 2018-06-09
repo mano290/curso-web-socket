@@ -1,0 +1,11 @@
+/storage/sysecommerce
+/node_modules
+/vendor
+/.env
+/.idea
+/.phpstorm.meta.php
+/Mockup - Parceiros
+tests/_output/*
+/composer.lock
+.DS_Store
+/package-lock.json

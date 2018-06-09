@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" id="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=0">
+    <title>WebSocket</title>
+</head>
+<body>
+
+<input type="text" id="name" placeholder="What`s your name?">
+<br><br>
+<textarea rows="6" id="message" placeholder="Your message"></textarea>
+<br><br>
+<div id="list-message"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js" integrity="sha256-ji09tECORKvr8xB9iCl8DJ8iNMLriDchC1+p+yt1hSs=" crossorigin="anonymous"></script>
+<script>
+
+    window.addEventListener("load", ()=> {
+
+        const Socket = io("http://localhost:3000");
+        Socket.on("server_hello", onReceiveMessage);
+        Socket.on("server_client_history_loaded", onLoadHistory);
+
+        Socket.emit("client_history");
+
+        let $message_client = document.querySelector("#message");
+        let $name_client = document.querySelector("#name");
+        let $list_message = document.querySelector("#list-message");
+
+        // Send message client
+        $message_client.addEventListener("keyup", (event)=> {
+
+            // If enter press
+            if(event.keyCode === 13 && (! event.shiftKey)) {
+
+                // Send message websocket
+                Socket.emit("client_hello", {
+                    name_client: $name_client.value,
+                    message: $message_client.value
+                });
+
+                $message_client.value = "";
+            }
+        });
+
+        /**
+         * On receive Message
+         * @param data
+         */
+        function onReceiveMessage(data) {
+            $list_message.innerHTML += `
+                <div>
+                    <b>${data.name_client} says:</b>
+                    ${data.message}
+                </div>`;
+        }
+
+        function onLoadHistory(history) {
+            history = JSON.parse(history);
+            let length = history.length;
+            for(let i = 0; i < length; i++) {
+                onReceiveMessage(history[i]);
+            }
+        }
+    });
+
+</script>
+</body>
+</html>
