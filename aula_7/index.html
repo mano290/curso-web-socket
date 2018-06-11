@@ -58,6 +58,7 @@
         }
 
         function onLoadHistory(history) {
+            if(history === "") return;
             history = JSON.parse(history);
             let length = history.length;
             for(let i = 0; i < length; i++) {
