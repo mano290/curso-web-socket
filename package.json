@@ -4,8 +4,11 @@
   "description": "Aula treinaweb sobre nodejs",
   "main": "index.js",
   "dependencies": {
+    "@material/list": "^0.36.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "gulp": "^3.9.1",
+    "gulp-uglify": "^3.0.0",
     "jade": "^1.11.0",
     "mongodb": "^3.0.10",
     "promise": "^8.0.1",

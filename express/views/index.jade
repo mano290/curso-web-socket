@@ -2,11 +2,35 @@ doctype html5
 html(lang="pt-br")
     head
         title TreinaWeb
-        style(style='text/css').
-            * {
-                margin: 0;
-                padding: 0;
-                font-family: "Roboto", sans-serif;
-            }
+        link(rel="stylesheet" type="text/css" href="/assets/express.css")
+        link(rel="stylesheet" type="text/css" href="/assets/mdc.list.min.css")
+        link(rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons")
+        link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto")
     body
         h1  Olá Node Express With Jade
+        p= nome
+        br
+        form(action="/new-curso" method="POST")
+            label Nome:
+            input(
+                type="text"
+                name="nome"
+                required
+            )
+            br
+            br
+            label Categoria:
+            select(name="categoria" required)
+                option Back-End
+                option Desenvolvimento de Jogos
+                option Front-End
+                option Mobile
+            br
+            br
+            button(type="submit") Enviar
+
+            ul(class="mdc-list mdc-list--two-line" aria-orientation="vertical")
+                each curso in cursos
+                    li(class="mdc-list-item")
+                        span(class="mdc-list-item__text")= curso.nome ? curso.nome : "Sem nome"
+                            span(class="mdc-list-item__secondary-text")= curso.categoria
